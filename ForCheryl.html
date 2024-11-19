@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bwatt pacal aku yang cantiii</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background: #ffe4e1;
+        }
+
+        .intro {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        .intro h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .intro .button {
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .intro .button:hover {
+            background-color: #ff1493;
+        }
+
+        .intro .flowers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/flower-dust.png');
+            background-size: cover;
+            z-index: -1;
+            animation: flowersAnimation 15s infinite linear;
+        }
+
+        @keyframes flowersAnimation {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .map {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 80%;
+            background: linear-gradient(135deg, #ffc0cb, #ff69b4);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transform: scale(1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: none;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .map:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .map:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+            clip-path: polygon(50% 0%, 100% 50%, 0% 50%);
+            transition: clip-path 0.6s ease-in-out;
+        }
+
+        .map.open:before {
+            clip-path: polygon(50% 100%, 100% 50%, 0% 50%);
+        }
+
+        .paper {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform-origin: bottom;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .map.open .paper {
+            opacity: 1;
+        }
+
+        .paper .lines {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                #f0f4f8,
+                #f0f4f8 1px,
+                white 1px,
+                white 15px
+            );
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .paper p {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.8;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tampilan Menu Awal -->
+    <div class="intro">
+        <div>
+            <h1 id="romanticText">Selamat datang, Sayang! ❤️</h1>
+            <button class="button" onclick="openEnvelope()">Buka Surat</button>
+        </div>
+        <div class="flowers">
+            <!-- Background bunga bergerak -->
+        </div>
+    </div>
+
+    <!-- Amplop yang Akan Muncul Setelah Klik Tombol -->
+    <div class="map" id="map" onclick="openMap()">
+        <div class="paper">
+            <div class="lines">
+                <p>Halo Sayang,</p>
+                <p>Sebelumnya aku benar-benar minta maaf buat semua yang udah terjadi...</p>
+                <p>Aku juga lagi berusaha ngertiin kamu kok, dan aku juga tau itu emang berat...</p>
+                <p>Tapi ada hal yang harus kamu tau kalo disini aku juga rasain hal yang sama...</p>
+                <p>Kaya yang aku bilang dari awal, kalo aku bakal terus dan terus berusaha buat jadi yang terbaik buat kamu...</p>
+                <p>Jadi aku bakal tetep sabar dan sabar buat nungguin keputusan kamu nanti...</p>
+                <p>Semangat buat kita! I LOVE U MORE ♥️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio (lagu) yang diputar saat amplop dibuka -->
+    <audio id="audio" preload="auto">
+        <source src="https://www.example.com/path_to_audio/I_Love_U_So.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Fungsi untuk mengganti teks romantis yang bisa di-custom
+        document.getElementById("romanticText").innerText = "Allooo ayang! 💖"; // Bisa diubah sesuai keinginan
+
+        // Fungsi untuk membuka amplop
+        function openEnvelope() {
+            document.querySelector('.intro').style.display = 'none'; // Menyembunyikan menu awal
+            const map = document.getElementById('map');
+            map.style.display = 'block'; // Menampilkan amplop
+            const audio = document.getElementById('audio');
+            audio.play(); // Memainkan lagu
+        }
+
+        // Fungsi untuk membuka map dan menunjukkan surat
+        function openMap() {
+            const map = document.querySelector('.map');
+            map.classList.toggle('open');
+        }
+    </script>
+
+</body>
+</html>
